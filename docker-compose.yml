@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: local_mongo
+    ports:
+      - "27017:27017"
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:8.10.2
+    user: root
+    environment:
+      - ELASTIC_HOST=${ELASTIC_HOST}
+      - ELASTIC_UNAME=${ELASTIC_UNAME}
+      - ELASTIC_PASSWD=${ELASTIC_PASSWD}
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./:/app/:ro 
+    command: >
+      bash -c "
+      filebeat setup -e;
+      filebeat -e
+      "
