@@ -10,7 +10,7 @@ const connectDB = async () => {
   try {
     if (mongoose.connection.readyState >= 1) return;
 
-    await mongoose.connect(MONGLO_URI, {
+    await mongoose.connect(MONGO_URI, {
       serverSelectionTimeoutMS: 2000, // Fail after 2 seconds instead of 30
       connectTimeoutMS: 5000,         // Give up on initial connection after 5s
     });

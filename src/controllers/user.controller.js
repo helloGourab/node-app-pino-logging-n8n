@@ -1,11 +1,14 @@
 import * as userService from '../services/user.service.js';
 
-export const create = async (req, res, next) => { // Added next
+export const create = async (req, res, next) => { 
     try {
         const user = await userService.createUser(req.body);
+
+        req.log.info({ msg: "USER_REGISTERED_SUCCESS", email: newUser.email });
+
         res.status(201).json(user);
     } catch (error) {
-        next(error); // Passes to Global Error Handler in index.js
+        next(error); 
     }
 };
 
