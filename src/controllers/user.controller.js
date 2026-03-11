@@ -4,7 +4,7 @@ export const create = async (req, res, next) => {
     try {
         const user = await userService.createUser(req.body);
 
-        req.log.info({ msg: "USER_REGISTERED_SUCCESS", email: newUser.email });
+        req.log.info({ msg: "USER_REGISTERED_SUCCESS", email: user.email });
 
         res.status(201).json(user);
     } catch (error) {
