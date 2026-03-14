@@ -8,9 +8,10 @@ export const importRepo = async (req, res, next) => {
         // We keep this info log because it's a "Happy Path" milestone
         req.log.info({ msg: "GITHUB_REPO_IMPORTED", id: savedData._id });
 
+        const stars = savedData.stars ?? 0;
         const formattedResponse = {
             ...savedData.toObject(),
-            starBadge: savedData.stargazers_count.toLocaleString() + ' ⭐'
+            starBadge: stars.toLocaleString() + ' ⭐'
         };
 
         res.status(201).json(formattedResponse);
